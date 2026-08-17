@@ -1,0 +1,187 @@
+---
+title: "Aula2"
+editor: visual
+---
+
+```{r}
+#| eval: false
+
+## Criar projeto
+
+## Vetores
+c(5,2,5)
+c("nome", "sobrenome")
+V1 = c(5,-9,1.1); V1
+V2 = 1:10
+V2.1 = seq(1,10)
+V2.1
+V3 = seq(1,10, by = 2); V3
+V4 = seq(1,10, by = 3); V4
+V5 = c(5,5,5);V5
+V5
+v5 = c(5,5,5);v5
+V5.1 = rep(5,3) # rep(numero a ser repetido, quantas repeticoes)
+V5.1 
+V6 = rep(1:5,2); V6 # rep(sequencia, quantas repeticoes)
+V7 = rep(seq(1,10, by = 2),3); V7
+altura = c("baixo", "medio", "alto"); altura
+peso = c("leve",
+         "pesado"); peso
+
+# Classe do objeto
+class(V1)
+V8 = c(1,2,3,"a");V8
+class(V8)
+
+### Acessando elementos do vetor
+V2
+V2[3]
+V8[4]
+V4[c(3,6)]
+V7[c(3,6)]
+
+### Trocar valor de elementos do vetor
+V5
+V5[2] = 2
+V5[2] = 5;V5
+
+### Excluindo elemento do vetor
+V4
+V4[-2]
+v4[-2];v4
+
+### Funções com vetores
+sum(V3) # soma dos elementos
+length(V3) # tamanho do vetor: quantidade de elementos
+min(V3) # valor mínimo
+max(V3) # valor máximo
+range(V3) # valores mínimo e máximo
+mean(V6) # media
+median(V6) # mediana
+var(V3) # variância
+sd(V3) # desvio padrão
+cv = sd(V3)/mean(V3)*100 # cv = (desvio padrao / media)*100
+sort(V3) # ordena o vetor em ordem crescente
+sort(V3, decreasing = TRUE) # ordena o vetor em ordem decrescente
+head(V7) # mostra o começo do vetor
+summary(V3) # resumo estatístico
+
+
+## Matrizes
+A = matrix(c(1:9), ncol = 2); A
+A2 = matrix(c(1:9), ncol = 3); A2
+B = matrix(1:8, nrow = 2); B
+nrow(B) # numero de linhas
+ncol(B) # numero de colunas
+dim(B) # linhas e colunas simultaneamente
+length(B) # número de elementos da matriz
+
+# Matriz 3x2
+C = matrix(1:6, nrow = 3, ncol = 2); C
+
+# Matriz 2x3
+D = matrix(1:6, nrow = 2, ncol = 3); D
+
+# Matriz 3x3
+E = matrix(1:6, nrow = 3, ncol = 3); E
+E = matrix(1:6,nrow=3, ncol=3);E
+
+# Disposição por coluna
+C
+C3 = matrix(1:6, nrow = 3, ncol = 2, byrow = TRUE); C3
+C2 = matrix(1:6,nrow=3, ncol=2, byrow=TRUE);C2 # argumento 'byrow = TRUE' para organizar por linha
+
+### Acessando posicoes na matriz
+A
+A[2,1] # [linha, coluna]
+A[1,] # Todos os elementos da linha 1
+A[,2] # Todos os elementos da coluna 2
+
+# Alterar valores
+A[2,2] = 0;A # Elemento da linha 2, coluna 2 é igual a 0
+A[2,2] = 7;A
+
+### Excluir elementos
+# A[os comandos aqui sao para as linhas, os comandos aqui sao para as colunas]
+A[-1,]
+A
+A = A[-1,] # Exclui linha 1
+A3 = A[-1,] # Exclui linha 1
+B
+B[,-3] # Exclui coluna 3
+B1 = B[,-3]
+N = E[-1,-3];N # Exclui linha 1 e coluna 3
+E[c(-1,-2),] # Exclui linas 1 e 2
+E[,c(-1,-2)] # Exclui colunas 1 e 2
+
+### Acrescentar elementos
+A
+A2 = rbind(c(10,11), A); A2
+A2 = rbind(A, c(10,11)); A2
+A3 = cbind(A, c(10,11,12)); A3  # Adiciona coluna à direita
+cbind(A, c(10,11,12,13))
+B = matrix(10:18,ncol=3);B
+AB = rbind(A,B);AB
+AB = cbind(A,B);AB
+
+### Algumas funcoes
+M1 = matrix(c(2,9,-9,4,11,-2,7,10,3),ncol=3);M1
+colSums(M1) # soma os elementos das colunas da matriz
+rowSums(M1) # soma os elementos das linhas da matriz
+colMeans(M1) # média dos elementos das colunas da matriz
+rowMeans(M1) # média dos elementos das linhas da matriz
+
+## Dataframes
+DF = data.frame(numeros = c(1,2,3), letras = c("a", "b", "c")); DF
+DF = data.frame(numeros = c(1,2,3), letras = c("a", "b","c"));DF
+
+alunos = data.frame(Nome = c("Carlos", "Alberto", "Carol",
+                             "Franci", "Roberto"),
+                    Cidade_natal = c("Petrolina", "Campina Grande",
+                                     "Juazeiro", "Sao Paulo", "Natal"),
+                    Idade = c(28, 29, 26, 34, 40))
+alunos
+nrow(alunos)
+ncol(alunos)
+dim(alunos)
+
+alunos$Nome
+
+### Acessar os dados do dataframe
+alunos[,1]
+alunos[1,1]
+alunos[2,"Nome"]
+alunos$Cidade_natal
+alunos$Idade
+alunos$Nome[3]
+names(alunos)
+alunos$nome
+names(alunos)
+
+### Filtros
+alunos
+alunos[alunos$Idade>30,]
+alunos[alunos$Idade>=29,]
+alunos[alunos$Idade>30,"Nome"]
+subset(alunos, Idade>30) #requer argumento logico
+subset(alunos, Idade==40)
+subset(alunos, Idade>=29)
+subset(alunos, Idade>=29 & Idade<40)
+
+## Listas
+n = c(2,3,5);n
+s = c('aa','bb','cc','dd');s
+b = c(TRUE,FALSE,TRUE,FALSE,FALSE);b
+l = list(n,s,b,-8);l
+#Incluindo um novo elemento na lista
+l[[5]] = matrix(c(0,1,2,-6,3,9),ncol=3);l
+
+## Finalizando a parte de objetos
+ls() # listar todos os objetos criados 
+rm(n) # remover um objeto criado
+rm(list = ls()) # limpar todos os objetos criados
+
+
+```
+
+------------------------------------------------------------------------

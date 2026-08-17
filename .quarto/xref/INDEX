@@ -1,0 +1,23 @@
+{
+  "index.qmd": {
+    "index.html": "3d9e1c69"
+  },
+  "carregamento.qmd": {
+    "carregamento.html": "ee7f728d"
+  },
+  "fundamentos.qmd": {
+    "fundamentos.html": "9a483fbf"
+  },
+  "aula1.qmd": {
+    "aula1.html": "641eb27f"
+  },
+  "aula2.qmd": {
+    "aula2.html": "8329ad63"
+  },
+  "aula3.qmd": {
+    "aula3.html": "1d6a52dc"
+  },
+  "aula4.qmd": {
+    "aula4.html": "f2866677"
+  }
+}

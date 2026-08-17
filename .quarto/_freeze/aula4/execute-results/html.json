@@ -1,0 +1,15 @@
+{
+  "hash": "2d871fc0ad380f38a4a7ccabf96564aa",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Aula 4\"\neditor: visual\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\n### Graficos basicos\n\nls() # Listar todos os objetos criados\n\n## Carregar os dados\narvores = read.csv(\"Arvores.csv\", sep = \";\", \n                   dec = \",\")\nabobora = read.table(\"Abobora.txt\", header = T, \n                     dec = \",\")\nnames(arvores)\nstr(arvores)\n\n## Grafico de dispersao\nplot(arvores$DAP, arvores$Volume) # plot(x, y)\nplot(arvores$Volume ~ arvores$DAP)\n\n## Histograma\nhist(arvores$DAP)\nhist(arvores$Volume)\nhist(abobora$DMA)\n\n## Grafico de barras\nbarplot(abobora$DMA) # gera uma barra para cada obs\nnames(abobora)\n# Calcular media por tratamento\n# tapply: (variavel, agrupamento, calculo desejado)\nmedia = tapply(abobora$P, abobora$Trat,\n               mean)\nsoma = tapply(abobora$P, abobora$Trat,\n               sum)\nmedia\nbarplot(media)\nbarplot(soma)\nbarplot(sort(media))\nbarplot(sort(media)) # Ordem crescente\nbarplot(sort(media, decreasing = T)) # decrescente\n\n## Boxplot\nboxplot(arvores$DAP)\nboxplot(arvores$Altura)\nboxplot(abobora$DMA ~ abobora$Trat)\nboxplot(abobora$P ~ abobora$Bl)\n\npar(mfrow = c(2,2)) # janela com 4 graficos (2 linhas e 2 colunas)\nboxplot(abobora$DMA)\nboxplot(abobora$C)\nboxplot(abobora$P)\nboxplot(abobora$MEC)\npar(mfrow = c(1,2)) # janela com 2 graficos (1 linha e 2 colunas)\npar(mfrow = c(1,1)) # janela com 1 graficos (1 linha e 1 coluna)\n\n#---------------- Grafico de dispesao (plot) ----------------------\npar(mfrow = c(1,1))\npar(mar = c(2,3,2,2))\nplot(arvores$DAP, arvores$Volume)\n\n# Renomear o titulo dos eixos: xlab/ylab\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à Altura do Peito (DAP)\",\n     ylab = \"Volume\")\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = \"Volume (m³)\")\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = expression(Volume ~ (m^ckasdjnv)))\n\n# Alterar as margens do grafico:\npar(mar=c(1, 1, 1, 1))\npar(mar=c(5, 5, 2.5, 1))\n#c(inferior, esquerda, superior, direita)\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = expression(Volume ~ (m^3)))\n```\n:::\n\n\n---\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

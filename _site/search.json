@@ -1,0 +1,279 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "semiárido.R",
+    "section": "",
+    "text": "Este espaço reúne scripts e exemplos práticos para análise de dados experimentais utilizando o R.\nO objetivo é disponibilizar códigos organizados, comentados e de fácil adaptação para atividades rotineiras de análise de dados.\n\n\nInicialmente, o repositório será organizado em tópicos como:\n\ncarregamento de dados;\norganização e manipulação;\nvisualização;\nanálises estatísticas;\nmodelagem;\nanálise multivariada.\n\n\n\n\nCada seção apresentará exemplos de código em R acompanhados de explicações e orientações para adaptação aos seus próprios dados.",
+    "crumbs": [
+      "INÍCIO"
+    ]
+  },
+  {
+    "objectID": "index.html#conteúdos",
+    "href": "index.html#conteúdos",
+    "title": "semiárido.R",
+    "section": "",
+    "text": "Inicialmente, o repositório será organizado em tópicos como:\n\ncarregamento de dados;\norganização e manipulação;\nvisualização;\nanálises estatísticas;\nmodelagem;\nanálise multivariada.",
+    "crumbs": [
+      "INÍCIO"
+    ]
+  },
+  {
+    "objectID": "index.html#como-utilizar",
+    "href": "index.html#como-utilizar",
+    "title": "semiárido.R",
+    "section": "",
+    "text": "Cada seção apresentará exemplos de código em R acompanhados de explicações e orientações para adaptação aos seus próprios dados.",
+    "crumbs": [
+      "INÍCIO"
+    ]
+  },
+  {
+    "objectID": "carregamento.html",
+    "href": "carregamento.html",
+    "title": "Carregamento de dados",
+    "section": "",
+    "text": "Antes de realizar qualquer análise, é necessário carregar os dados para o ambiente do R.\nNesta seção são apresentados exemplos para o carregamento dos principais formatos de arquivos utilizados na análise de dados."
+  },
+  {
+    "objectID": "carregamento.html#arquivos-csv",
+    "href": "carregamento.html#arquivos-csv",
+    "title": "Carregamento de dados",
+    "section": "Arquivos CSV",
+    "text": "Arquivos CSV\nArquivos .csv podem ser carregados utilizando funções nativas do R.\n\nArquivos separados por ponto e vírgula\nQuando as colunas são separadas por ponto e vírgula (;) e a vírgula é utilizada como separador decimal, pode-se utilizar a função read.csv2():\n\ndados &lt;- read.csv2(\"dados.csv\")\n\nA função read.csv2() considera, por padrão:\n\ndados &lt;- read.table(\n  \"dados.csv\",\n  header = TRUE,\n  sep = \";\",\n  dec = \",\"\n)\n\n\n\nArquivos separados por vírgula\nQuando as colunas são separadas por vírgula e o ponto é utilizado como separador decimal:\n\ndados &lt;- read.csv(\"dados.csv\")"
+  },
+  {
+    "objectID": "carregamento.html#arquivos-txt",
+    "href": "carregamento.html#arquivos-txt",
+    "title": "Carregamento de dados",
+    "section": "Arquivos TXT",
+    "text": "Arquivos TXT\nArquivos de texto podem ser carregados utilizando a função read.table().\nPor exemplo, para um arquivo cujas colunas são separadas por tabulação:\n\ndados &lt;- read.table(\n  \"dados.txt\",\n  header = TRUE,\n  sep = \"\\t\",\n  dec = \",\"\n)\n\nOs principais argumentos utilizados são:\n\nheader = TRUE: indica que a primeira linha contém os nomes das variáveis;\nsep: define o caractere utilizado para separar as colunas;\ndec: define o caractere utilizado como separador decimal."
+  },
+  {
+    "objectID": "carregamento.html#arquivos-excel",
+    "href": "carregamento.html#arquivos-excel",
+    "title": "Carregamento de dados",
+    "section": "Arquivos Excel",
+    "text": "Arquivos Excel\nPara carregar arquivos .xlsx, pode-se utilizar a função read_excel() do pacote readxl.\nPrimeiro, carregue o pacote:\n\nlibrary(readxl)\n\nEm seguida, carregue o arquivo:\n\ndados &lt;- read_excel(\"dados.xlsx\")\n\nCaso o arquivo possua mais de uma planilha, é possível indicar qual delas deve ser carregada:\n\ndados &lt;- read_excel(\n  \"dados.xlsx\",\n  sheet = \"Planilha1\"\n)"
+  },
+  {
+    "objectID": "carregamento.html#verificando-os-dados-carregados",
+    "href": "carregamento.html#verificando-os-dados-carregados",
+    "title": "Carregamento de dados",
+    "section": "Verificando os dados carregados",
+    "text": "Verificando os dados carregados\nApós o carregamento, é importante verificar se os dados foram lidos corretamente.\nPara visualizar as primeiras linhas:\n\nhead(dados)\n\nPara verificar a estrutura dos dados:\n\nstr(dados)\n\nPara obter um resumo das variáveis:\n\nsummary(dados)\n\nTambém é possível utilizar a função glimpse() do pacote dplyr:\n\ndplyr::glimpse(dados)"
+  },
+  {
+    "objectID": "carregamento.html#caminho-dos-arquivos",
+    "href": "carregamento.html#caminho-dos-arquivos",
+    "title": "Carregamento de dados",
+    "section": "Caminho dos arquivos",
+    "text": "Caminho dos arquivos\nQuando o arquivo está localizado na mesma pasta do projeto, basta informar o nome:\n\ndados &lt;- read.csv2(\"dados.csv\")\n\nSe o arquivo estiver dentro de uma subpasta chamada dados, informe o caminho relativo:\n\ndados &lt;- read.csv2(\"dados/dados.csv\")"
+  },
+  {
+    "objectID": "aula3.html",
+    "href": "aula3.html",
+    "title": "Aula3",
+    "section": "",
+    "text": "# Excluir todos os objetos criados\n\nrm(list = ls())\n\n## Identificar diretorio de trabalho atual\ngetwd()\n\n## Alterar o diretorio\nsetwd(\"D:/Embrapa/Curso R/Modulo 1 - Turma 3/Dados\")\n\n#### Importar dados\n\n### Mostrar como os dados devem ser organizados\n\n### Arquivo .csv\narvores = read.csv(\"Arvores_NA.csv\", sep = \";\", dec = \",\")\n# sep: identifica o separador de coluna \n# dec: indica o separador decimal\n\nView(arvores) # Vusualizar dados\n\n# read.csv2: não precisa indicar sep = \";\" e dec = \",\"\narvores2 = read.csv2(\"Arvores_NA.csv\")\n\narvores3 = read.table(\"Arvores_NA.csv\", header = TRUE,\n                      sep = \";\", dec = \",\")\n\n# Clipboard: traz o que está copiado no \"ctrl C\"\neucaliptus = read.table(\"clipboard\", header=TRUE, dec = \",\")\n\n# Arquivo.txt\nabobora = read.table(\"Abobora.txt\",header=  TRUE,\n                     dec = \",\")\n\n# Arquivo xlsx\ninstall.packages(\"readxl\") #instalar pacote \nlibrary(readxl)\neucaliptus = read_excel(\"Eucaliptus.xlsx\", sheet = 1)\n# sheet: identifica a aba na planilha que estao os dados\n\nrm(\"arvores4\")\n\n## Inspecao e estrutura dos dados\nhead(arvores) # Primeiras 6 linhas da tabela\ntail(arvores) # Ultimas 6 linhas da tabela\nclass(arvores) \nstr(arvores) # Estrutura das variaveis da base de dados\nnames(abobora) # Nome das variaveis\nlength(abobora)\nnrow(abobora)\nunique(arvores$Parcela)\nsummary(arvores) # Resumo descritivo das variáveis\n\n### Tratamento de valores ausentes\n\nnames(arvores)\n\nis.na(arvores)\nsum(is.na(arvores)) # quantos valores ausentes tem nos dados\ncolSums(is.na(arvores)) # valores ausentes por variavel\n\nmean(arvores$DAP)\nmean(arvores$DAP, na.rm = TRUE)\n\n## Substituir por zero\nsem.na = arvores # criei um novo objeto\nsum(is.na(sem.na))\nsem.na[is.na(sem.na)] = 0\n\nmean(arvores$DAP, na.rm = TRUE)\nmean(sem.na$DAP)\n\n## Substituir pela media\npela.media = arvores\npela.media$DAP[is.na(pela.media$DAP)] = \n  mean(pela.media$DAP, na.rm = TRUE)\n\nmean(arvores$DAP, na.rm = TRUE)\nmean(pela.media$DAP)\n\npela.media$Altura[is.na(pela.media$Altura)] = \n  mean(pela.media$Altura, na.rm = TRUE)\n\nmean(arvores$Altura, na.rm = TRUE)\n\n## Excluir\nabd = arvores[, colSums(is.na(arvores)) &lt; 20]\n\n\n## Alterar o tipo de variavel\n\nstr(abobora)\n\n#Para fator\nabobora$Trat = as.factor(abobora$Trat)\nabobora$Bl = as.factor(abobora$Bl)\n\n#Para valor inteiro\nabobora$Trat = as.integer(abobora$Trat)\n\n#Para numero\nabobora$Bl = as.numeric(abobora$Bl)\nstr(abobora)\n\n## Sorteio de numeros aleatorios\n# sample(inicio:fim, num de elementos) // \n# default: sem reposicao\n\nsample(1:20, 5)\nsample(1:20, 6)\nsample(1:5, 10)\nsample(1:5, 10)\nsample(1:5, 10, replace = TRUE)\n\n# set.seed: determina sempre a mesma amostragem ou número aleatório\nset.seed(170) \nsample(1:20,5)\n\nset.seed(254)\nsample(1:20,5)",
+    "crumbs": [
+      "INTRODUÇÃO AO R PARA PESQUISA AGROPECUÁRIA",
+      "Aula 3"
+    ]
+  },
+  {
+    "objectID": "aula1.html",
+    "href": "aula1.html",
+    "title": "Aula1",
+    "section": "",
+    "text": "# R como calculadora\n2+2\n3-1\n2/8\n5*5\n10^2 # Potencia\n2.2+1.3 # Ponto \".\" como separador decimal\nsqrt(25) # Raiz quadrada\nlog(64,10)#Log na base 10 (valor a ser calculado, base\n?log\nlog10(64) #Log na base 10\nlog(64) #Log natural\n9/3+2\n9/(3+2)\n9+1/2\n(9+1)/2\n\n# 3 Ajuda\n?sum\nhelp(sum)\n\n# 4 Objetos\n## 4.1 Numerico (numeric)\n\nfilipe = 2+2;filipe\nidade = 21+25+40+25\nidade2 = 21+23+55\nidade+idade2\nIdade = 25+65+30 # \"Idade\" e diferente de \"idade\"\nidade.filipe = 23\nidade.david = 40\ni.filipe = 23\nidade.filipe+idade.david\nidade = 35 # substitui a variável anteriormente nomeada\n\n## Texto (character)\nnome = \"filipe\"\n\n## classe de um objeto\nclass(idade)\n\nsobrenome = \"freitas\"\nnome + sobrenome\ncbind(nome,sobrenome)\ncbind(nome, sobrenome, idade.filipe)\n\n## Inteiro (integer)\nx = as.integer(5.9);x\ny = as.integer(7.922486);y\nclass(x)\nclass(idade)\n\nz = 7.922486\nround(z)\nround(z) #Função de arredondamento\nround(z,1)\nz2 = round(z,3)\n\n## Apagar objetos\nrm(nome)\nrm(idade2)\nrm(list = ls()) # apagar tudo\nrm(list = c(\"x\",\"y\"))\nls()\n\n## classe de um objeto\nclass(z)\n\n## Vetores\nc(5,2,5)\nc(\"nome\", \"sobrenome\")\nv1 = c(5,-9,1.1);v1\nv2 = 1:10;v2\nv2.1 = seq(1,10)\nv3 = seq(1,10,by=2);v3\nv4 = seq(1,10,by=3);v4\nv5 = c(5,5,5);v5\nv5.1 = rep(5,3);v5.1 # rep(numero a ser repetido, quantas repeticoes)\nv6 = rep(1:5,2);v6 # rep(sequencia, quantas repeticoes)\nv6.1 = rep(1:5,times=2);v6.1\nv7 = rep(seq(1,3),times=3);v7\naltura = c(\"baixo\", \"medio\", \"alto\"); altura\npeso = c(\"leve\", \"pesado\"); peso\nclass(altura)\nv8 = c(1,2,3,\"a\");v8\nclass(v8)\n\n### Acessando elementos do vetor\nv2\nv1[3]\nv2[c(3,6)]\nv2[15]\n\n### Trocar valor de elementos do vetor\nv5\nv5[2] = 2\nv5[2] = 5;v5\n\n### Excluindo elemento do vetor\nv4\nv4[-2];v4\n\n### Funções com vetores\nsum(v3) # soma dos elementos\nlength(v3) # tamanho do vetor: quantidade de elementos\nmin(v3) # valor mínimo\nmax(v3) # valor máximo\nrange(v3) # valores mínimo e máximo\nmean(v3) # media\nmedian(v3) # mediana\nvar(v3) # variância\nsd(v3) # desvio padrão\ncv = sd(v3)/mean(v3)*100\nsort(v3) # ordena o vetor em ordem crescente\nsort(v3, decreasing = TRUE) # ordena o vetor em ordem crescente ou a funcao rev(v3)\norder(v1) # numero de posicoes\nappend(v3,5,1) # anexa ao vetor o número 5 após a 1ª posição\nhead(v3) # mostra o começo do vetor\ntail(v3) # mostra o final do vetor\nsummary(v3) # resumo estatístico\nprod(v3) # faz o produto entre os elementos do vetor\n\n\n## Matrizes\nA = matrix(c(1,2,3,4,5,6,7,8,9),ncol=3);A\nB = matrix(1:8,nrow=2);B\nnrow(B) # numero de linhas\nncol(B) # numero de colunas\ndim(B) # linhas e colunas simultaneamente\nlength(B) # número de elementos da matriz\n\n# Matriz 3x2\nC = matrix(1:6,nrow=3, ncol=2,);C\n\n# Matriz 2x3\nD = matrix(1:6,nrow=2, ncol=3);D\n\n# Matriz 3x3\nE = matrix(1:6,nrow=3, ncol=3);E\n\n# Disposição por coluna\nC\nC2 = matrix(1:6,nrow=3, ncol=2, byrow=TRUE);C2 # argumento 'byrow = TRUE' para organizar por linha\n\n### Acessando posicoes na matriz\nA\nA[2,1] # [linha, coluna]\nA[1,] # Todos os elementos da linha 1\nA[,2]\nA[,2] # Todos os elementos da coluna 2\n\n# Alterar valores\nA[2,2] = 0;A # Elemento da linha 2, coluna 2 é igual a 0\nA[2,2] = 5;A\n\n### Excluir elementos\n# A[os comandos aqui sao para as linhas, os comandos aqui sao para as colunas]\nA = A[-1,] # Exclui linha 1\nA\nA[,-3] # Exclui coluna 3\nN = A[-1,-3];N # Exclui linha 1 e coluna 3\nA[c(-1,-2),] # Exclui linas 1 e 2\nA[,c(-1,-2)] # Exclui colunas 1 e 2\n\n### Acrescentar elementos\nA\nA2.1 = rbind(c(10,11,12),A);A2.1\nA2 = rbind(A,c(10,11,12));A2 # Adiciona linha abaixo\nA3 = cbind(c(10,11,12),A);A3 # Adiciona coluna à direita\nB = matrix(10:18,ncol=3);B\nAB = rbind(A,B);AB\nAB = cbind(A,B);AB\n\n### Algumas funcoes\nM1 = matrix(c(2,9,-9,4,11,-2,7,10,3),ncol=3);M1\ncolSums(M1) # soma os elementos das colunas da matriz\nrowSums(M1) # soma os elementos das linhas da matriz\ncolMeans(M1) # média dos elementos das colunas da matriz\nrowMeans(M1) # média dos elementos das linhas da matriz\n\n## Dataframes\nDF = data.frame(numeros = c(1,2,3), letras = c(\"a\", \"b\",\"c\"));DF\n\nalunos = data.frame(Nome = c(\"Carlos\", \"Alberto\", \"Carol\",\n                             \"Franci\", \"Roberto\"),\n                    Cidade_natal = c(\"Petrolina\", \"Campina Grande\",\n                                     \"Juazeiro\", \"Sao Paulo\", \"Natal\"),\n                    Idade = c(28, 29, 26, 34, 40))\nalunos\nnrow(alunos)\nncol(alunos)\ndim(alunos)\n\nalunos$Nome\n\n### Acessar os dados do dataframe\nalunos[,1]\nalunos[1,1]\nalunos[2,\"Nome\"]\nalunos$Idade\nalunos$Nome[3]\nnames(alunos)\n\n#Spoiler\naov(alunos$Idade ~ alunos$Nome)\n\n### Filtros\nalunos[alunos$Idade&gt;30,]\nalunos[alunos$Idade&gt;30,\"Nome\"]\nsubset(alunos, Idade&gt;30) #requer argumento logico\nsubset(alunos, Idade==40)\nsubset(alunos, Idade&gt;29)\nsubset(alunos, Idade&gt;=29)\nsubset(alunos, Idade&gt;=29 & Idade&lt;40)\n\n## Listas\nn = c(2,3,5);n\ns = c('aa','bb','cc','dd');s\nb = c(TRUE,FALSE,TRUE,FALSE,FALSE);b\nl = list(n,s,b,-8);l\n#Incluindo um novo elemento na lista\nl[[5]] = matrix(c(0,1,2,-6,3,9),ncol=3);l\n\n## Finalizando a parte de objetos\nls() # listar todos os objetos criados \nrm(n) # remover um objeto criado\nrm(list = ls()) # limpar todos os objetos criados",
+    "crumbs": [
+      "INTRODUÇÃO AO R PARA PESQUISA AGROPECUÁRIA",
+      "Aula 1"
+    ]
+  },
+  {
+    "objectID": "aula2.html",
+    "href": "aula2.html",
+    "title": "Aula2",
+    "section": "",
+    "text": "## Criar projeto\n\n## Vetores\nc(5,2,5)\nc(\"nome\", \"sobrenome\")\nV1 = c(5,-9,1.1); V1\nV2 = 1:10\nV2.1 = seq(1,10)\nV2.1\nV3 = seq(1,10, by = 2); V3\nV4 = seq(1,10, by = 3); V4\nV5 = c(5,5,5);V5\nV5\nv5 = c(5,5,5);v5\nV5.1 = rep(5,3) # rep(numero a ser repetido, quantas repeticoes)\nV5.1 \nV6 = rep(1:5,2); V6 # rep(sequencia, quantas repeticoes)\nV7 = rep(seq(1,10, by = 2),3); V7\naltura = c(\"baixo\", \"medio\", \"alto\"); altura\npeso = c(\"leve\",\n         \"pesado\"); peso\n\n# Classe do objeto\nclass(V1)\nV8 = c(1,2,3,\"a\");V8\nclass(V8)\n\n### Acessando elementos do vetor\nV2\nV2[3]\nV8[4]\nV4[c(3,6)]\nV7[c(3,6)]\n\n### Trocar valor de elementos do vetor\nV5\nV5[2] = 2\nV5[2] = 5;V5\n\n### Excluindo elemento do vetor\nV4\nV4[-2]\nv4[-2];v4\n\n### Funções com vetores\nsum(V3) # soma dos elementos\nlength(V3) # tamanho do vetor: quantidade de elementos\nmin(V3) # valor mínimo\nmax(V3) # valor máximo\nrange(V3) # valores mínimo e máximo\nmean(V6) # media\nmedian(V6) # mediana\nvar(V3) # variância\nsd(V3) # desvio padrão\ncv = sd(V3)/mean(V3)*100 # cv = (desvio padrao / media)*100\nsort(V3) # ordena o vetor em ordem crescente\nsort(V3, decreasing = TRUE) # ordena o vetor em ordem decrescente\nhead(V7) # mostra o começo do vetor\nsummary(V3) # resumo estatístico\n\n\n## Matrizes\nA = matrix(c(1:9), ncol = 2); A\nA2 = matrix(c(1:9), ncol = 3); A2\nB = matrix(1:8, nrow = 2); B\nnrow(B) # numero de linhas\nncol(B) # numero de colunas\ndim(B) # linhas e colunas simultaneamente\nlength(B) # número de elementos da matriz\n\n# Matriz 3x2\nC = matrix(1:6, nrow = 3, ncol = 2); C\n\n# Matriz 2x3\nD = matrix(1:6, nrow = 2, ncol = 3); D\n\n# Matriz 3x3\nE = matrix(1:6, nrow = 3, ncol = 3); E\nE = matrix(1:6,nrow=3, ncol=3);E\n\n# Disposição por coluna\nC\nC3 = matrix(1:6, nrow = 3, ncol = 2, byrow = TRUE); C3\nC2 = matrix(1:6,nrow=3, ncol=2, byrow=TRUE);C2 # argumento 'byrow = TRUE' para organizar por linha\n\n### Acessando posicoes na matriz\nA\nA[2,1] # [linha, coluna]\nA[1,] # Todos os elementos da linha 1\nA[,2] # Todos os elementos da coluna 2\n\n# Alterar valores\nA[2,2] = 0;A # Elemento da linha 2, coluna 2 é igual a 0\nA[2,2] = 7;A\n\n### Excluir elementos\n# A[os comandos aqui sao para as linhas, os comandos aqui sao para as colunas]\nA[-1,]\nA\nA = A[-1,] # Exclui linha 1\nA3 = A[-1,] # Exclui linha 1\nB\nB[,-3] # Exclui coluna 3\nB1 = B[,-3]\nN = E[-1,-3];N # Exclui linha 1 e coluna 3\nE[c(-1,-2),] # Exclui linas 1 e 2\nE[,c(-1,-2)] # Exclui colunas 1 e 2\n\n### Acrescentar elementos\nA\nA2 = rbind(c(10,11), A); A2\nA2 = rbind(A, c(10,11)); A2\nA3 = cbind(A, c(10,11,12)); A3  # Adiciona coluna à direita\ncbind(A, c(10,11,12,13))\nB = matrix(10:18,ncol=3);B\nAB = rbind(A,B);AB\nAB = cbind(A,B);AB\n\n### Algumas funcoes\nM1 = matrix(c(2,9,-9,4,11,-2,7,10,3),ncol=3);M1\ncolSums(M1) # soma os elementos das colunas da matriz\nrowSums(M1) # soma os elementos das linhas da matriz\ncolMeans(M1) # média dos elementos das colunas da matriz\nrowMeans(M1) # média dos elementos das linhas da matriz\n\n## Dataframes\nDF = data.frame(numeros = c(1,2,3), letras = c(\"a\", \"b\", \"c\")); DF\nDF = data.frame(numeros = c(1,2,3), letras = c(\"a\", \"b\",\"c\"));DF\n\nalunos = data.frame(Nome = c(\"Carlos\", \"Alberto\", \"Carol\",\n                             \"Franci\", \"Roberto\"),\n                    Cidade_natal = c(\"Petrolina\", \"Campina Grande\",\n                                     \"Juazeiro\", \"Sao Paulo\", \"Natal\"),\n                    Idade = c(28, 29, 26, 34, 40))\nalunos\nnrow(alunos)\nncol(alunos)\ndim(alunos)\n\nalunos$Nome\n\n### Acessar os dados do dataframe\nalunos[,1]\nalunos[1,1]\nalunos[2,\"Nome\"]\nalunos$Cidade_natal\nalunos$Idade\nalunos$Nome[3]\nnames(alunos)\nalunos$nome\nnames(alunos)\n\n### Filtros\nalunos\nalunos[alunos$Idade&gt;30,]\nalunos[alunos$Idade&gt;=29,]\nalunos[alunos$Idade&gt;30,\"Nome\"]\nsubset(alunos, Idade&gt;30) #requer argumento logico\nsubset(alunos, Idade==40)\nsubset(alunos, Idade&gt;=29)\nsubset(alunos, Idade&gt;=29 & Idade&lt;40)\n\n## Listas\nn = c(2,3,5);n\ns = c('aa','bb','cc','dd');s\nb = c(TRUE,FALSE,TRUE,FALSE,FALSE);b\nl = list(n,s,b,-8);l\n#Incluindo um novo elemento na lista\nl[[5]] = matrix(c(0,1,2,-6,3,9),ncol=3);l\n\n## Finalizando a parte de objetos\nls() # listar todos os objetos criados \nrm(n) # remover um objeto criado\nrm(list = ls()) # limpar todos os objetos criados",
+    "crumbs": [
+      "INTRODUÇÃO AO R PARA PESQUISA AGROPECUÁRIA",
+      "Aula 2"
+    ]
+  },
+  {
+    "objectID": "aula4.html",
+    "href": "aula4.html",
+    "title": "Aula 4",
+    "section": "",
+    "text": "### Graficos basicos\n\nls() # Listar todos os objetos criados\n\n## Carregar os dados\narvores = read.csv(\"Arvores.csv\", sep = \";\", \n                   dec = \",\")\nabobora = read.table(\"Abobora.txt\", header = T, \n                     dec = \",\")\nnames(arvores)\nstr(arvores)\n\n## Grafico de dispersao\nplot(arvores$DAP, arvores$Volume) # plot(x, y)\nplot(arvores$Volume ~ arvores$DAP)\n\n## Histograma\nhist(arvores$DAP)\nhist(arvores$Volume)\nhist(abobora$DMA)\n\n## Grafico de barras\nbarplot(abobora$DMA) # gera uma barra para cada obs\nnames(abobora)\n# Calcular media por tratamento\n# tapply: (variavel, agrupamento, calculo desejado)\nmedia = tapply(abobora$P, abobora$Trat,\n               mean)\nsoma = tapply(abobora$P, abobora$Trat,\n               sum)\nmedia\nbarplot(media)\nbarplot(soma)\nbarplot(sort(media))\nbarplot(sort(media)) # Ordem crescente\nbarplot(sort(media, decreasing = T)) # decrescente\n\n## Boxplot\nboxplot(arvores$DAP)\nboxplot(arvores$Altura)\nboxplot(abobora$DMA ~ abobora$Trat)\nboxplot(abobora$P ~ abobora$Bl)\n\npar(mfrow = c(2,2)) # janela com 4 graficos (2 linhas e 2 colunas)\nboxplot(abobora$DMA)\nboxplot(abobora$C)\nboxplot(abobora$P)\nboxplot(abobora$MEC)\npar(mfrow = c(1,2)) # janela com 2 graficos (1 linha e 2 colunas)\npar(mfrow = c(1,1)) # janela com 1 graficos (1 linha e 1 coluna)\n\n#---------------- Grafico de dispesao (plot) ----------------------\npar(mfrow = c(1,1))\npar(mar = c(2,3,2,2))\nplot(arvores$DAP, arvores$Volume)\n\n# Renomear o titulo dos eixos: xlab/ylab\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à Altura do Peito (DAP)\",\n     ylab = \"Volume\")\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = \"Volume (m³)\")\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = expression(Volume ~ (m^ckasdjnv)))\n\n# Alterar as margens do grafico:\npar(mar=c(1, 1, 1, 1))\npar(mar=c(5, 5, 2.5, 1))\n#c(inferior, esquerda, superior, direita)\n\nplot(arvores$DAP, arvores$Volume,\n     xlab = \"Diâmetro à altura do peito (cm)\",\n     ylab = expression(Volume ~ (m^3)))",
+    "crumbs": [
+      "INTRODUÇÃO AO R PARA PESQUISA AGROPECUÁRIA",
+      "Aula 4"
+    ]
+  },
+  {
+    "objectID": "fundamentos.html",
+    "href": "fundamentos.html",
+    "title": "FUNDAMENTOS DO R",
+    "section": "",
+    "text": "O R é uma linguagem de programação voltada para análise de dados, estatística e produção de gráficos.\nNesta seção são apresentados alguns conceitos básicos para começar a trabalhar com o R."
+  },
+  {
+    "objectID": "fundamentos.html#r-como-calculadora",
+    "href": "fundamentos.html#r-como-calculadora",
+    "title": "FUNDAMENTOS DO R",
+    "section": "R como calculadora",
+    "text": "R como calculadora\nO R pode ser utilizado para realizar operações matemáticas simples.\n\n2 + 2\n\n[1] 4\n\n3 - 1\n\n[1] 2\n\n2 / 8\n\n[1] 0.25\n\n5 * 5\n\n[1] 25\n\n10^2\n\n[1] 100\n\n\nO símbolo ^ é utilizado para potenciação.\n\n10^2\n\n[1] 100\n\n\nPara calcular uma raiz quadrada, pode-se utilizar a função sqrt():\n\nsqrt(25)\n\n[1] 5\n\n\nTambém é possível calcular logaritmos.\n\nlog10(64)\n\n[1] 1.80618\n\nlog(64)\n\n[1] 4.158883\n\n\nA função log10() calcula o logaritmo na base 10, enquanto log() calcula, por padrão, o logaritmo natural.\n\nOrdem das operações\nO uso de parênteses altera a ordem em que as operações são realizadas.\n\n9 / 3 + 2\n\n[1] 5\n\n9 / (3 + 2)\n\n[1] 1.8\n\n(9 + 1) / 2\n\n[1] 5"
+  },
+  {
+    "objectID": "fundamentos.html#ajuda-no-r",
+    "href": "fundamentos.html#ajuda-no-r",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Ajuda no R",
+    "text": "Ajuda no R\nO R possui um sistema de ajuda integrado.\nPara consultar a documentação de uma função, pode-se utilizar ?:\n\n?sum\n\nou a função help():\n\nhelp(sum)\n\nEsses comandos apresentam informações sobre o funcionamento da função, seus argumentos e exemplos de utilização."
+  },
+  {
+    "objectID": "fundamentos.html#objetos",
+    "href": "fundamentos.html#objetos",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Objetos",
+    "text": "Objetos\nNo R, os resultados podem ser armazenados em objetos.\nPor exemplo:\n\nidade &lt;- 21 + 25 + 40 + 25\n\nidade\n\n[1] 111\n\n\nTambém é possível utilizar = para criar objetos:\n\nidade = 35\n\nO R diferencia letras maiúsculas de minúsculas.\n\nidade &lt;- 35\nIdade &lt;- 50\n\nidade\n\n[1] 35\n\nIdade\n\n[1] 50\n\n\nPortanto, idade e Idade são objetos diferentes.\n\nNomes dos objetos\nOs nomes podem ser utilizados para identificar o conteúdo armazenado.\n\nidade.filipe &lt;- 23\nidade.david &lt;- 40\n\nidade.filipe + idade.david\n\n[1] 63"
+  },
+  {
+    "objectID": "fundamentos.html#tipos-de-dados",
+    "href": "fundamentos.html#tipos-de-dados",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Tipos de dados",
+    "text": "Tipos de dados\nOs objetos podem armazenar diferentes tipos de informação.\n\nDados numéricos\n\nidade &lt;- 35\n\nclass(idade)\n\n[1] \"numeric\"\n\n\n\n\nDados de texto\nTextos devem ser colocados entre aspas.\n\nnome &lt;- \"Filipe\"\nsobrenome &lt;- \"Freitas\"\n\nclass(nome)\n\n[1] \"character\"\n\n\n\n\nNúmeros inteiros\nUm valor pode ser convertido para inteiro utilizando as.integer().\n\nx &lt;- as.integer(5.9)\n\nx\n\n[1] 5\n\nclass(x)\n\n[1] \"integer\""
+  },
+  {
+    "objectID": "fundamentos.html#arredondamento",
+    "href": "fundamentos.html#arredondamento",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Arredondamento",
+    "text": "Arredondamento\nA função round() pode ser utilizada para arredondar valores.\n\nz &lt;- 7.922486\n\nround(z)\n\n[1] 8\n\nround(z, 1)\n\n[1] 7.9\n\nround(z, 3)\n\n[1] 7.922\n\n\nO segundo argumento indica o número de casas decimais."
+  },
+  {
+    "objectID": "fundamentos.html#vetores",
+    "href": "fundamentos.html#vetores",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Vetores",
+    "text": "Vetores\nVetores são estruturas que armazenam vários elementos do mesmo tipo.\nA função c() pode ser utilizada para criar um vetor.\n\nv1 &lt;- c(5, -9, 1.1)\n\nv1\n\n[1]  5.0 -9.0  1.1\n\n\nTambém é possível criar sequências numéricas:\n\nv2 &lt;- 1:10\n\nv2\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nou utilizar a função seq():\n\nv3 &lt;- seq(1, 10, by = 2)\n\nv3\n\n[1] 1 3 5 7 9\n\n\nA função rep() permite repetir valores ou sequências.\n\nv4 &lt;- rep(5, 3)\n\nv4\n\n[1] 5 5 5\n\n\n\nv5 &lt;- rep(1:5, times = 2)\n\nv5\n\n [1] 1 2 3 4 5 1 2 3 4 5\n\n\n\nVetores de texto\n\naltura &lt;- c(\"baixo\", \"medio\", \"alto\")\n\naltura\n\n[1] \"baixo\" \"medio\" \"alto\" \n\nclass(altura)\n\n[1] \"character\"\n\n\nUm vetor deve possuir elementos do mesmo tipo.\nQuando números e textos são combinados, os números são convertidos para texto.\n\nv6 &lt;- c(1, 2, 3, \"a\")\n\nv6\n\n[1] \"1\" \"2\" \"3\" \"a\"\n\nclass(v6)\n\n[1] \"character\""
+  },
+  {
+    "objectID": "fundamentos.html#acessando-elementos-de-um-vetor",
+    "href": "fundamentos.html#acessando-elementos-de-um-vetor",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Acessando elementos de um vetor",
+    "text": "Acessando elementos de um vetor\nOs elementos podem ser acessados informando sua posição entre colchetes.\n\nv &lt;- c(10, 20, 30, 40, 50)\n\nv[3]\n\n[1] 30\n\n\nTambém é possível selecionar várias posições:\n\nv[c(2, 4)]\n\n[1] 20 40"
+  },
+  {
+    "objectID": "fundamentos.html#alterando-elementos-de-um-vetor",
+    "href": "fundamentos.html#alterando-elementos-de-um-vetor",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Alterando elementos de um vetor",
+    "text": "Alterando elementos de um vetor\n\nv &lt;- c(5, 5, 5)\n\nv[2] &lt;- 2\n\nv\n\n[1] 5 2 5"
+  },
+  {
+    "objectID": "fundamentos.html#excluindo-elementos-de-um-vetor",
+    "href": "fundamentos.html#excluindo-elementos-de-um-vetor",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Excluindo elementos de um vetor",
+    "text": "Excluindo elementos de um vetor\nO sinal negativo pode ser utilizado para excluir uma posição.\n\nv &lt;- c(10, 20, 30, 40)\n\nv[-2]\n\n[1] 10 30 40"
+  },
+  {
+    "objectID": "fundamentos.html#funções-úteis-para-vetores",
+    "href": "fundamentos.html#funções-úteis-para-vetores",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Funções úteis para vetores",
+    "text": "Funções úteis para vetores\nDiversas funções podem ser aplicadas diretamente aos elementos de um vetor.\n\nv &lt;- c(1, 3, 5, 7, 9)\n\nsum(v)\n\n[1] 25\n\nlength(v)\n\n[1] 5\n\nmin(v)\n\n[1] 1\n\nmax(v)\n\n[1] 9\n\nrange(v)\n\n[1] 1 9\n\nmean(v)\n\n[1] 5\n\nmedian(v)\n\n[1] 5\n\nvar(v)\n\n[1] 10\n\nsd(v)\n\n[1] 3.162278\n\n\nO coeficiente de variação pode ser calculado por:\n\nsd(v) / mean(v) * 100\n\n[1] 63.24555\n\n\nOutras funções úteis incluem:\n\nsort(v)\n\n[1] 1 3 5 7 9\n\nsort(v, decreasing = TRUE)\n\n[1] 9 7 5 3 1\n\nhead(v)\n\n[1] 1 3 5 7 9\n\ntail(v)\n\n[1] 1 3 5 7 9\n\nsummary(v)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n      1       3       5       5       7       9 \n\nprod(v)\n\n[1] 945"
+  },
+  {
+    "objectID": "fundamentos.html#matrizes",
+    "href": "fundamentos.html#matrizes",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Matrizes",
+    "text": "Matrizes\nMatrizes são estruturas bidimensionais formadas por linhas e colunas.\nA função matrix() pode ser utilizada para criar uma matriz.\n\nA &lt;- matrix(\n  c(1, 2, 3, 4, 5, 6, 7, 8, 9),\n  ncol = 3\n)\n\nA\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9\n\n\nÉ possível consultar suas dimensões:\n\nnrow(A)\n\n[1] 3\n\nncol(A)\n\n[1] 3\n\ndim(A)\n\n[1] 3 3\n\nlength(A)\n\n[1] 9\n\n\nPor padrão, os valores são organizados por coluna.\nPara preencher a matriz por linha:\n\nB &lt;- matrix(\n  1:6,\n  nrow = 2,\n  ncol = 3,\n  byrow = TRUE\n)\n\nB\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6"
+  },
+  {
+    "objectID": "fundamentos.html#acessando-elementos-de-uma-matriz",
+    "href": "fundamentos.html#acessando-elementos-de-uma-matriz",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Acessando elementos de uma matriz",
+    "text": "Acessando elementos de uma matriz\nA estrutura geral é:\nmatriz[linha, coluna]\nPor exemplo:\n\nA[2, 1]\n\n[1] 2\n\n\nPara selecionar uma linha inteira:\n\nA[1, ]\n\n[1] 1 4 7\n\n\nPara selecionar uma coluna inteira:\n\nA[, 2]\n\n[1] 4 5 6"
+  },
+  {
+    "objectID": "fundamentos.html#alterando-elementos-de-uma-matriz",
+    "href": "fundamentos.html#alterando-elementos-de-uma-matriz",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Alterando elementos de uma matriz",
+    "text": "Alterando elementos de uma matriz\n\nA[2, 2] &lt;- 0\n\nA\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    0    8\n[3,]    3    6    9"
+  },
+  {
+    "objectID": "fundamentos.html#excluindo-linhas-e-colunas",
+    "href": "fundamentos.html#excluindo-linhas-e-colunas",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Excluindo linhas e colunas",
+    "text": "Excluindo linhas e colunas\nPara excluir uma linha:\n\nA[-1, ]\n\n     [,1] [,2] [,3]\n[1,]    2    0    8\n[2,]    3    6    9\n\n\nPara excluir uma coluna:\n\nA[, -3]\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    0\n[3,]    3    6"
+  },
+  {
+    "objectID": "fundamentos.html#acrescentando-linhas-e-colunas",
+    "href": "fundamentos.html#acrescentando-linhas-e-colunas",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Acrescentando linhas e colunas",
+    "text": "Acrescentando linhas e colunas\nA função rbind() acrescenta linhas:\n\nrbind(A, c(10, 11, 12))\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    0    8\n[3,]    3    6    9\n[4,]   10   11   12\n\n\nA função cbind() acrescenta colunas:\n\ncbind(A, c(10, 11, 12))\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    4    7   10\n[2,]    2    0    8   11\n[3,]    3    6    9   12"
+  },
+  {
+    "objectID": "fundamentos.html#funções-aplicadas-às-matrizes",
+    "href": "fundamentos.html#funções-aplicadas-às-matrizes",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Funções aplicadas às matrizes",
+    "text": "Funções aplicadas às matrizes\n\nM &lt;- matrix(\n  c(2, 9, -9, 4, 11, -2, 7, 10, 3),\n  ncol = 3\n)\n\ncolSums(M)\n\n[1]  2 13 20\n\nrowSums(M)\n\n[1] 13 30 -8\n\ncolMeans(M)\n\n[1] 0.6666667 4.3333333 6.6666667\n\nrowMeans(M)\n\n[1]  4.333333 10.000000 -2.666667"
+  },
+  {
+    "objectID": "fundamentos.html#data-frames",
+    "href": "fundamentos.html#data-frames",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Data frames",
+    "text": "Data frames\nO data.frame é uma das estruturas mais utilizadas para armazenar dados no R.\nEle organiza as informações em linhas e colunas, de forma semelhante a uma planilha.\n\nalunos &lt;- data.frame(\n  Nome = c(\n    \"Carlos\",\n    \"Alberto\",\n    \"Carol\",\n    \"Franci\",\n    \"Roberto\"\n  ),\n  Cidade_natal = c(\n    \"Petrolina\",\n    \"Campina Grande\",\n    \"Juazeiro\",\n    \"Sao Paulo\",\n    \"Natal\"\n  ),\n  Idade = c(28, 29, 26, 34, 40)\n)\n\nalunos\n\n     Nome   Cidade_natal Idade\n1  Carlos      Petrolina    28\n2 Alberto Campina Grande    29\n3   Carol       Juazeiro    26\n4  Franci      Sao Paulo    34\n5 Roberto          Natal    40\n\n\nÉ possível verificar o número de linhas e colunas:\n\nnrow(alunos)\n\n[1] 5\n\nncol(alunos)\n\n[1] 3\n\ndim(alunos)\n\n[1] 5 3"
+  },
+  {
+    "objectID": "fundamentos.html#acessando-dados-de-um-data-frame",
+    "href": "fundamentos.html#acessando-dados-de-um-data-frame",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Acessando dados de um data frame",
+    "text": "Acessando dados de um data frame\nUma coluna pode ser acessada utilizando $:\n\nalunos$Nome\n\n[1] \"Carlos\"  \"Alberto\" \"Carol\"   \"Franci\"  \"Roberto\"\n\n\nou por sua posição:\n\nalunos[, 1]\n\n[1] \"Carlos\"  \"Alberto\" \"Carol\"   \"Franci\"  \"Roberto\"\n\n\nUm elemento específico pode ser acessado informando linha e coluna:\n\nalunos[1, 1]\n\n[1] \"Carlos\"\n\n\nTambém é possível utilizar o nome da variável:\n\nalunos[2, \"Nome\"]\n\n[1] \"Alberto\"\n\n\nPara consultar os nomes das variáveis:\n\nnames(alunos)\n\n[1] \"Nome\"         \"Cidade_natal\" \"Idade\""
+  },
+  {
+    "objectID": "fundamentos.html#filtrando-dados",
+    "href": "fundamentos.html#filtrando-dados",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Filtrando dados",
+    "text": "Filtrando dados\nFiltros podem ser realizados utilizando expressões lógicas.\nPor exemplo, para selecionar pessoas com idade maior que 30 anos:\n\nalunos[alunos$Idade &gt; 30, ]\n\n     Nome Cidade_natal Idade\n4  Franci    Sao Paulo    34\n5 Roberto        Natal    40\n\n\nCom a função subset():\n\nsubset(alunos, Idade &gt; 30)\n\n     Nome Cidade_natal Idade\n4  Franci    Sao Paulo    34\n5 Roberto        Natal    40\n\n\nOutros exemplos:\n\nsubset(alunos, Idade == 40)\n\n     Nome Cidade_natal Idade\n5 Roberto        Natal    40\n\nsubset(alunos, Idade &gt;= 29)\n\n     Nome   Cidade_natal Idade\n2 Alberto Campina Grande    29\n4  Franci      Sao Paulo    34\n5 Roberto          Natal    40\n\nsubset(\n  alunos,\n  Idade &gt;= 29 & Idade &lt; 40\n)\n\n     Nome   Cidade_natal Idade\n2 Alberto Campina Grande    29\n4  Franci      Sao Paulo    34"
+  },
+  {
+    "objectID": "fundamentos.html#listas",
+    "href": "fundamentos.html#listas",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Listas",
+    "text": "Listas\nListas permitem armazenar objetos de diferentes tipos dentro de uma mesma estrutura.\n\nn &lt;- c(2, 3, 5)\n\ns &lt;- c(\"aa\", \"bb\", \"cc\", \"dd\")\n\nb &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE)\n\nlista &lt;- list(n, s, b, -8)\n\nlista\n\n[[1]]\n[1] 2 3 5\n\n[[2]]\n[1] \"aa\" \"bb\" \"cc\" \"dd\"\n\n[[3]]\n[1]  TRUE FALSE  TRUE FALSE FALSE\n\n[[4]]\n[1] -8\n\n\nTambém é possível acrescentar novos elementos:\n\nlista[[5]] &lt;- matrix(\n  c(0, 1, 2, -6, 3, 9),\n  ncol = 3\n)\n\nlista\n\n[[1]]\n[1] 2 3 5\n\n[[2]]\n[1] \"aa\" \"bb\" \"cc\" \"dd\"\n\n[[3]]\n[1]  TRUE FALSE  TRUE FALSE FALSE\n\n[[4]]\n[1] -8\n\n[[5]]\n     [,1] [,2] [,3]\n[1,]    0    2    3\n[2,]    1   -6    9"
+  },
+  {
+    "objectID": "fundamentos.html#gerenciamento-dos-objetos",
+    "href": "fundamentos.html#gerenciamento-dos-objetos",
+    "title": "FUNDAMENTOS DO R",
+    "section": "Gerenciamento dos objetos",
+    "text": "Gerenciamento dos objetos\nPara visualizar todos os objetos presentes no ambiente:\n\nls()\n\n [1] \"A\"            \"altura\"       \"alunos\"       \"b\"            \"B\"           \n [6] \"idade\"        \"Idade\"        \"idade.david\"  \"idade.filipe\" \"lista\"       \n[11] \"M\"            \"n\"            \"nome\"         \"s\"            \"sobrenome\"   \n[16] \"v\"            \"v1\"           \"v2\"           \"v3\"           \"v4\"          \n[21] \"v5\"           \"v6\"           \"x\"            \"z\"           \n\n\nPara remover um objeto:\n\nrm(n)\n\nPara remover vários objetos:\n\nrm(list = c(\"x\", \"y\"))\n\nWarning in rm(list = c(\"x\", \"y\")): objeto 'y' não encontrado\n\n\nPara remover todos os objetos do ambiente:\n\nrm(list = ls())"
+  },
+  {
+    "objectID": "fundamentos.html#atenção-rmlist-ls-remove-todos-os-objetos-presentes-no-ambiente-atual-do-r.",
+    "href": "fundamentos.html#atenção-rmlist-ls-remove-todos-os-objetos-presentes-no-ambiente-atual-do-r.",
+    "title": "FUNDAMENTOS DO R",
+    "section": "> Atenção: rm(list = ls()) remove todos os objetos presentes no ambiente atual do R.",
+    "text": "&gt; Atenção: rm(list = ls()) remove todos os objetos presentes no ambiente atual do R."
+  }
+]

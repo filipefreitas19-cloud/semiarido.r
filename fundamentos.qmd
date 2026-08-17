@@ -1,0 +1,564 @@
+---
+title: "FUNDAMENTOS DO R"
+---
+
+O R é uma linguagem de programação voltada para análise de dados, estatística e produção de gráficos.
+
+Nesta seção são apresentados alguns conceitos básicos para começar a trabalhar com o R.
+
+## R como calculadora
+
+O R pode ser utilizado para realizar operações matemáticas simples.
+
+```{r}
+2 + 2
+3 - 1
+2 / 8
+5 * 5
+10^2
+```
+
+O símbolo `^` é utilizado para potenciação.
+
+```{r}
+10^2
+```
+
+Para calcular uma raiz quadrada, pode-se utilizar a função `sqrt()`:
+
+```{r}
+sqrt(25)
+```
+
+Também é possível calcular logaritmos.
+
+```{r}
+log10(64)
+log(64)
+```
+
+A função `log10()` calcula o logaritmo na base 10, enquanto `log()` calcula, por padrão, o logaritmo natural.
+
+### Ordem das operações
+
+O uso de parênteses altera a ordem em que as operações são realizadas.
+
+```{r}
+9 / 3 + 2
+
+9 / (3 + 2)
+
+(9 + 1) / 2
+```
+
+## Ajuda no R
+
+O R possui um sistema de ajuda integrado.
+
+Para consultar a documentação de uma função, pode-se utilizar `?`:
+
+```{r}
+#| eval: false
+
+?sum
+```
+
+ou a função `help()`:
+
+```{r}
+#| eval: false
+
+help(sum)
+```
+
+Esses comandos apresentam informações sobre o funcionamento da função, seus argumentos e exemplos de utilização.
+
+## Objetos
+
+No R, os resultados podem ser armazenados em objetos.
+
+Por exemplo:
+
+```{r}
+idade <- 21 + 25 + 40 + 25
+
+idade
+```
+
+Também é possível utilizar `=` para criar objetos:
+
+```{r}
+idade = 35
+```
+
+O R diferencia letras maiúsculas de minúsculas.
+
+```{r}
+idade <- 35
+Idade <- 50
+
+idade
+Idade
+```
+
+Portanto, `idade` e `Idade` são objetos diferentes.
+
+### Nomes dos objetos
+
+Os nomes podem ser utilizados para identificar o conteúdo armazenado.
+
+```{r}
+idade.filipe <- 23
+idade.david <- 40
+
+idade.filipe + idade.david
+```
+
+## Tipos de dados
+
+Os objetos podem armazenar diferentes tipos de informação.
+
+### Dados numéricos
+
+```{r}
+idade <- 35
+
+class(idade)
+```
+
+### Dados de texto
+
+Textos devem ser colocados entre aspas.
+
+```{r}
+nome <- "Filipe"
+sobrenome <- "Freitas"
+
+class(nome)
+```
+
+### Números inteiros
+
+Um valor pode ser convertido para inteiro utilizando `as.integer()`.
+
+```{r}
+x <- as.integer(5.9)
+
+x
+class(x)
+```
+
+## Arredondamento
+
+A função `round()` pode ser utilizada para arredondar valores.
+
+```{r}
+z <- 7.922486
+
+round(z)
+round(z, 1)
+round(z, 3)
+```
+
+O segundo argumento indica o número de casas decimais.
+
+## Vetores
+
+Vetores são estruturas que armazenam vários elementos do mesmo tipo.
+
+A função `c()` pode ser utilizada para criar um vetor.
+
+```{r}
+v1 <- c(5, -9, 1.1)
+
+v1
+```
+
+Também é possível criar sequências numéricas:
+
+```{r}
+v2 <- 1:10
+
+v2
+```
+
+ou utilizar a função `seq()`:
+
+```{r}
+v3 <- seq(1, 10, by = 2)
+
+v3
+```
+
+A função `rep()` permite repetir valores ou sequências.
+
+```{r}
+v4 <- rep(5, 3)
+
+v4
+```
+
+```{r}
+v5 <- rep(1:5, times = 2)
+
+v5
+```
+
+### Vetores de texto
+
+```{r}
+altura <- c("baixo", "medio", "alto")
+
+altura
+class(altura)
+```
+
+Um vetor deve possuir elementos do mesmo tipo.
+
+Quando números e textos são combinados, os números são convertidos para texto.
+
+```{r}
+v6 <- c(1, 2, 3, "a")
+
+v6
+class(v6)
+```
+
+## Acessando elementos de um vetor
+
+Os elementos podem ser acessados informando sua posição entre colchetes.
+
+```{r}
+v <- c(10, 20, 30, 40, 50)
+
+v[3]
+```
+
+Também é possível selecionar várias posições:
+
+```{r}
+v[c(2, 4)]
+```
+
+## Alterando elementos de um vetor
+
+```{r}
+v <- c(5, 5, 5)
+
+v[2] <- 2
+
+v
+```
+
+## Excluindo elementos de um vetor
+
+O sinal negativo pode ser utilizado para excluir uma posição.
+
+```{r}
+v <- c(10, 20, 30, 40)
+
+v[-2]
+```
+
+## Funções úteis para vetores
+
+Diversas funções podem ser aplicadas diretamente aos elementos de um vetor.
+
+```{r}
+v <- c(1, 3, 5, 7, 9)
+
+sum(v)
+length(v)
+min(v)
+max(v)
+range(v)
+mean(v)
+median(v)
+var(v)
+sd(v)
+```
+
+O coeficiente de variação pode ser calculado por:
+
+```{r}
+sd(v) / mean(v) * 100
+```
+
+Outras funções úteis incluem:
+
+```{r}
+sort(v)
+sort(v, decreasing = TRUE)
+head(v)
+tail(v)
+summary(v)
+prod(v)
+```
+
+## Matrizes
+
+Matrizes são estruturas bidimensionais formadas por linhas e colunas.
+
+A função `matrix()` pode ser utilizada para criar uma matriz.
+
+```{r}
+A <- matrix(
+  c(1, 2, 3, 4, 5, 6, 7, 8, 9),
+  ncol = 3
+)
+
+A
+```
+
+É possível consultar suas dimensões:
+
+```{r}
+nrow(A)
+ncol(A)
+dim(A)
+length(A)
+```
+
+Por padrão, os valores são organizados por coluna.
+
+Para preencher a matriz por linha:
+
+```{r}
+B <- matrix(
+  1:6,
+  nrow = 2,
+  ncol = 3,
+  byrow = TRUE
+)
+
+B
+```
+
+## Acessando elementos de uma matriz
+
+A estrutura geral é:
+
+```text
+matriz[linha, coluna]
+```
+
+Por exemplo:
+
+```{r}
+A[2, 1]
+```
+
+Para selecionar uma linha inteira:
+
+```{r}
+A[1, ]
+```
+
+Para selecionar uma coluna inteira:
+
+```{r}
+A[, 2]
+```
+
+## Alterando elementos de uma matriz
+
+```{r}
+A[2, 2] <- 0
+
+A
+```
+
+## Excluindo linhas e colunas
+
+Para excluir uma linha:
+
+```{r}
+A[-1, ]
+```
+
+Para excluir uma coluna:
+
+```{r}
+A[, -3]
+```
+
+## Acrescentando linhas e colunas
+
+A função `rbind()` acrescenta linhas:
+
+```{r}
+rbind(A, c(10, 11, 12))
+```
+
+A função `cbind()` acrescenta colunas:
+
+```{r}
+cbind(A, c(10, 11, 12))
+```
+
+## Funções aplicadas às matrizes
+
+```{r}
+M <- matrix(
+  c(2, 9, -9, 4, 11, -2, 7, 10, 3),
+  ncol = 3
+)
+
+colSums(M)
+rowSums(M)
+colMeans(M)
+rowMeans(M)
+```
+
+## Data frames
+
+O `data.frame` é uma das estruturas mais utilizadas para armazenar dados no R.
+
+Ele organiza as informações em linhas e colunas, de forma semelhante a uma planilha.
+
+```{r}
+alunos <- data.frame(
+  Nome = c(
+    "Carlos",
+    "Alberto",
+    "Carol",
+    "Franci",
+    "Roberto"
+  ),
+  Cidade_natal = c(
+    "Petrolina",
+    "Campina Grande",
+    "Juazeiro",
+    "Sao Paulo",
+    "Natal"
+  ),
+  Idade = c(28, 29, 26, 34, 40)
+)
+
+alunos
+```
+
+É possível verificar o número de linhas e colunas:
+
+```{r}
+nrow(alunos)
+ncol(alunos)
+dim(alunos)
+```
+
+## Acessando dados de um data frame
+
+Uma coluna pode ser acessada utilizando `$`:
+
+```{r}
+alunos$Nome
+```
+
+ou por sua posição:
+
+```{r}
+alunos[, 1]
+```
+
+Um elemento específico pode ser acessado informando linha e coluna:
+
+```{r}
+alunos[1, 1]
+```
+
+Também é possível utilizar o nome da variável:
+
+```{r}
+alunos[2, "Nome"]
+```
+
+Para consultar os nomes das variáveis:
+
+```{r}
+names(alunos)
+```
+
+## Filtrando dados
+
+Filtros podem ser realizados utilizando expressões lógicas.
+
+Por exemplo, para selecionar pessoas com idade maior que 30 anos:
+
+```{r}
+alunos[alunos$Idade > 30, ]
+```
+
+Com a função `subset()`:
+
+```{r}
+subset(alunos, Idade > 30)
+```
+
+Outros exemplos:
+
+```{r}
+subset(alunos, Idade == 40)
+
+subset(alunos, Idade >= 29)
+
+subset(
+  alunos,
+  Idade >= 29 & Idade < 40
+)
+```
+
+## Listas
+
+Listas permitem armazenar objetos de diferentes tipos dentro de uma mesma estrutura.
+
+```{r}
+n <- c(2, 3, 5)
+
+s <- c("aa", "bb", "cc", "dd")
+
+b <- c(TRUE, FALSE, TRUE, FALSE, FALSE)
+
+lista <- list(n, s, b, -8)
+
+lista
+```
+
+Também é possível acrescentar novos elementos:
+
+```{r}
+lista[[5]] <- matrix(
+  c(0, 1, 2, -6, 3, 9),
+  ncol = 3
+)
+
+lista
+```
+
+## Gerenciamento dos objetos
+
+Para visualizar todos os objetos presentes no ambiente:
+
+```{r}
+ls()
+```
+
+Para remover um objeto:
+
+```{r}
+rm(n)
+```
+
+Para remover vários objetos:
+
+```{r}
+rm(list = c("x", "y"))
+```
+
+Para remover todos os objetos do ambiente:
+
+```{r}
+rm(list = ls())
+```
+
+> **Atenção:** `rm(list = ls())` remove todos os objetos presentes no ambiente atual do R.
+---

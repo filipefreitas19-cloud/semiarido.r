@@ -1,0 +1,239 @@
+---
+title: "Aula1"
+editor: visual
+---
+
+```{r}
+#| eval: false
+
+# R como calculadora
+2+2
+3-1
+2/8
+5*5
+10^2 # Potencia
+2.2+1.3 # Ponto "." como separador decimal
+sqrt(25) # Raiz quadrada
+log(64,10)#Log na base 10 (valor a ser calculado, base
+?log
+log10(64) #Log na base 10
+log(64) #Log natural
+9/3+2
+9/(3+2)
+9+1/2
+(9+1)/2
+
+# 3 Ajuda
+?sum
+help(sum)
+
+# 4 Objetos
+## 4.1 Numerico (numeric)
+
+filipe = 2+2;filipe
+idade = 21+25+40+25
+idade2 = 21+23+55
+idade+idade2
+Idade = 25+65+30 # "Idade" e diferente de "idade"
+idade.filipe = 23
+idade.david = 40
+i.filipe = 23
+idade.filipe+idade.david
+idade = 35 # substitui a variável anteriormente nomeada
+
+## Texto (character)
+nome = "filipe"
+
+## classe de um objeto
+class(idade)
+
+sobrenome = "freitas"
+nome + sobrenome
+cbind(nome,sobrenome)
+cbind(nome, sobrenome, idade.filipe)
+
+## Inteiro (integer)
+x = as.integer(5.9);x
+y = as.integer(7.922486);y
+class(x)
+class(idade)
+
+z = 7.922486
+round(z)
+round(z) #Função de arredondamento
+round(z,1)
+z2 = round(z,3)
+
+## Apagar objetos
+rm(nome)
+rm(idade2)
+rm(list = ls()) # apagar tudo
+rm(list = c("x","y"))
+ls()
+
+## classe de um objeto
+class(z)
+
+## Vetores
+c(5,2,5)
+c("nome", "sobrenome")
+v1 = c(5,-9,1.1);v1
+v2 = 1:10;v2
+v2.1 = seq(1,10)
+v3 = seq(1,10,by=2);v3
+v4 = seq(1,10,by=3);v4
+v5 = c(5,5,5);v5
+v5.1 = rep(5,3);v5.1 # rep(numero a ser repetido, quantas repeticoes)
+v6 = rep(1:5,2);v6 # rep(sequencia, quantas repeticoes)
+v6.1 = rep(1:5,times=2);v6.1
+v7 = rep(seq(1,3),times=3);v7
+altura = c("baixo", "medio", "alto"); altura
+peso = c("leve", "pesado"); peso
+class(altura)
+v8 = c(1,2,3,"a");v8
+class(v8)
+
+### Acessando elementos do vetor
+v2
+v1[3]
+v2[c(3,6)]
+v2[15]
+
+### Trocar valor de elementos do vetor
+v5
+v5[2] = 2
+v5[2] = 5;v5
+
+### Excluindo elemento do vetor
+v4
+v4[-2];v4
+
+### Funções com vetores
+sum(v3) # soma dos elementos
+length(v3) # tamanho do vetor: quantidade de elementos
+min(v3) # valor mínimo
+max(v3) # valor máximo
+range(v3) # valores mínimo e máximo
+mean(v3) # media
+median(v3) # mediana
+var(v3) # variância
+sd(v3) # desvio padrão
+cv = sd(v3)/mean(v3)*100
+sort(v3) # ordena o vetor em ordem crescente
+sort(v3, decreasing = TRUE) # ordena o vetor em ordem crescente ou a funcao rev(v3)
+order(v1) # numero de posicoes
+append(v3,5,1) # anexa ao vetor o número 5 após a 1ª posição
+head(v3) # mostra o começo do vetor
+tail(v3) # mostra o final do vetor
+summary(v3) # resumo estatístico
+prod(v3) # faz o produto entre os elementos do vetor
+
+
+## Matrizes
+A = matrix(c(1,2,3,4,5,6,7,8,9),ncol=3);A
+B = matrix(1:8,nrow=2);B
+nrow(B) # numero de linhas
+ncol(B) # numero de colunas
+dim(B) # linhas e colunas simultaneamente
+length(B) # número de elementos da matriz
+
+# Matriz 3x2
+C = matrix(1:6,nrow=3, ncol=2,);C
+
+# Matriz 2x3
+D = matrix(1:6,nrow=2, ncol=3);D
+
+# Matriz 3x3
+E = matrix(1:6,nrow=3, ncol=3);E
+
+# Disposição por coluna
+C
+C2 = matrix(1:6,nrow=3, ncol=2, byrow=TRUE);C2 # argumento 'byrow = TRUE' para organizar por linha
+
+### Acessando posicoes na matriz
+A
+A[2,1] # [linha, coluna]
+A[1,] # Todos os elementos da linha 1
+A[,2]
+A[,2] # Todos os elementos da coluna 2
+
+# Alterar valores
+A[2,2] = 0;A # Elemento da linha 2, coluna 2 é igual a 0
+A[2,2] = 5;A
+
+### Excluir elementos
+# A[os comandos aqui sao para as linhas, os comandos aqui sao para as colunas]
+A = A[-1,] # Exclui linha 1
+A
+A[,-3] # Exclui coluna 3
+N = A[-1,-3];N # Exclui linha 1 e coluna 3
+A[c(-1,-2),] # Exclui linas 1 e 2
+A[,c(-1,-2)] # Exclui colunas 1 e 2
+
+### Acrescentar elementos
+A
+A2.1 = rbind(c(10,11,12),A);A2.1
+A2 = rbind(A,c(10,11,12));A2 # Adiciona linha abaixo
+A3 = cbind(c(10,11,12),A);A3 # Adiciona coluna à direita
+B = matrix(10:18,ncol=3);B
+AB = rbind(A,B);AB
+AB = cbind(A,B);AB
+
+### Algumas funcoes
+M1 = matrix(c(2,9,-9,4,11,-2,7,10,3),ncol=3);M1
+colSums(M1) # soma os elementos das colunas da matriz
+rowSums(M1) # soma os elementos das linhas da matriz
+colMeans(M1) # média dos elementos das colunas da matriz
+rowMeans(M1) # média dos elementos das linhas da matriz
+
+## Dataframes
+DF = data.frame(numeros = c(1,2,3), letras = c("a", "b","c"));DF
+
+alunos = data.frame(Nome = c("Carlos", "Alberto", "Carol",
+                             "Franci", "Roberto"),
+                    Cidade_natal = c("Petrolina", "Campina Grande",
+                                     "Juazeiro", "Sao Paulo", "Natal"),
+                    Idade = c(28, 29, 26, 34, 40))
+alunos
+nrow(alunos)
+ncol(alunos)
+dim(alunos)
+
+alunos$Nome
+
+### Acessar os dados do dataframe
+alunos[,1]
+alunos[1,1]
+alunos[2,"Nome"]
+alunos$Idade
+alunos$Nome[3]
+names(alunos)
+
+#Spoiler
+aov(alunos$Idade ~ alunos$Nome)
+
+### Filtros
+alunos[alunos$Idade>30,]
+alunos[alunos$Idade>30,"Nome"]
+subset(alunos, Idade>30) #requer argumento logico
+subset(alunos, Idade==40)
+subset(alunos, Idade>29)
+subset(alunos, Idade>=29)
+subset(alunos, Idade>=29 & Idade<40)
+
+## Listas
+n = c(2,3,5);n
+s = c('aa','bb','cc','dd');s
+b = c(TRUE,FALSE,TRUE,FALSE,FALSE);b
+l = list(n,s,b,-8);l
+#Incluindo um novo elemento na lista
+l[[5]] = matrix(c(0,1,2,-6,3,9),ncol=3);l
+
+## Finalizando a parte de objetos
+ls() # listar todos os objetos criados 
+rm(n) # remover um objeto criado
+rm(list = ls()) # limpar todos os objetos criados
+
+```
+
+------------------------------------------------------------------------

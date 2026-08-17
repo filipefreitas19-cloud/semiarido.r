@@ -1,0 +1,153 @@
+---
+title: "Carregamento de dados"
+---
+
+Antes de realizar qualquer análise, é necessário carregar os dados para o ambiente do R.
+
+Nesta seção são apresentados exemplos para o carregamento dos principais formatos de arquivos utilizados na análise de dados.
+
+## Arquivos CSV
+
+Arquivos `.csv` podem ser carregados utilizando funções nativas do R.
+
+### Arquivos separados por ponto e vírgula
+
+Quando as colunas são separadas por ponto e vírgula (`;`) e a vírgula é utilizada como separador decimal, pode-se utilizar a função `read.csv2()`:
+
+```{r}
+#| eval: false
+
+dados <- read.csv2("dados.csv")
+```
+
+A função `read.csv2()` considera, por padrão:
+
+```{r}
+#| eval: false
+
+dados <- read.table(
+  "dados.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ","
+)
+```
+
+### Arquivos separados por vírgula
+
+Quando as colunas são separadas por vírgula e o ponto é utilizado como separador decimal:
+
+```{r}
+#| eval: false
+
+dados <- read.csv("dados.csv")
+```
+
+## Arquivos TXT
+
+Arquivos de texto podem ser carregados utilizando a função `read.table()`.
+
+Por exemplo, para um arquivo cujas colunas são separadas por tabulação:
+
+```{r}
+#| eval: false
+
+dados <- read.table(
+  "dados.txt",
+  header = TRUE,
+  sep = "\t",
+  dec = ","
+)
+```
+
+Os principais argumentos utilizados são:
+
+- `header = TRUE`: indica que a primeira linha contém os nomes das variáveis;
+- `sep`: define o caractere utilizado para separar as colunas;
+- `dec`: define o caractere utilizado como separador decimal.
+
+## Arquivos Excel
+
+Para carregar arquivos `.xlsx`, pode-se utilizar a função `read_excel()` do pacote `readxl`.
+
+Primeiro, carregue o pacote:
+
+```{r}
+#| eval: false
+
+library(readxl)
+```
+
+Em seguida, carregue o arquivo:
+
+```{r}
+#| eval: false
+
+dados <- read_excel("dados.xlsx")
+```
+
+Caso o arquivo possua mais de uma planilha, é possível indicar qual delas deve ser carregada:
+
+```{r}
+#| eval: false
+
+dados <- read_excel(
+  "dados.xlsx",
+  sheet = "Planilha1"
+)
+```
+
+## Verificando os dados carregados
+
+Após o carregamento, é importante verificar se os dados foram lidos corretamente.
+
+Para visualizar as primeiras linhas:
+
+```{r}
+#| eval: false
+
+head(dados)
+```
+
+Para verificar a estrutura dos dados:
+
+```{r}
+#| eval: false
+
+str(dados)
+```
+
+Para obter um resumo das variáveis:
+
+```{r}
+#| eval: false
+
+summary(dados)
+```
+
+Também é possível utilizar a função `glimpse()` do pacote `dplyr`:
+
+```{r}
+#| eval: false
+
+dplyr::glimpse(dados)
+```
+
+## Caminho dos arquivos
+
+Quando o arquivo está localizado na mesma pasta do projeto, basta informar o nome:
+
+```{r}
+#| eval: false
+
+dados <- read.csv2("dados.csv")
+```
+
+Se o arquivo estiver dentro de uma subpasta chamada `dados`, informe o caminho relativo:
+
+```{r}
+#| eval: false
+
+dados <- read.csv2("dados/dados.csv")
+```
+---
